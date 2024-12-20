@@ -1,0 +1,58 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    environment:
+      SECRET_KEY: my_secret_key_from_env
+      DATABASE_URL: "postgresql://user:password@db-primary:5432/emails"
+      FLASK_ENV: development
+    depends_on:
+      - db-primary
+      - db-replica
+    ports:
+      - "5000:5000"
+
+  db-primary:
+    build:
+      context: ./db/primary
+    volumes:
+      - ./db/primary/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: emails
+
+  db-replica:
+    build:
+      context: ./db/replica
+    volumes:
+      - ./db/replica/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: emails
+    depends_on:
+      - db-primary
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/static:/usr/share/nginx/html/static
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  load_balancer:
+    build:
+      context: ./load_balancer
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

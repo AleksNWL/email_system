@@ -1,0 +1,226 @@
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative; /* Для абсолютного позиционирования фона */
+}
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-height: 85vh;
+    scrollbar-width: thin;
+    scrollbar-color: #acb6e5 #e0e0e0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Поднимаем поверх анимированного фона */
+}
+
+h1 {
+    text-align: center;
+    color: #444;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Анимация */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Навигация */
+.menu {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    width: 100%;
+    z-index: 2; /* Ставим поверх всех других элементов */
+}
+
+.menu-item {
+    text-decoration: none;
+    color: #fff;
+    background: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.menu-item:hover {
+    background: #0056b3;
+    transform: scale(1.1); /* Легкое увеличение при наведении */
+}
+
+/* Список писем */
+.email-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.email-item {
+    background: #fff;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.email-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.email-item span {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.email-item span strong {
+    color: #222;
+    font-weight: bold;
+}
+
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: #acb6e5;
+    border-radius: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+/* Формы */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center; /* Центрируем элементы формы */
+}
+
+input, textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 60%; /* Уменьшаем ширину для центрации */
+    margin: 10px 0;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Добавим плавные переходы для ввода */
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus, textarea:focus {
+    border-color: #007bff; /* Цвет фокуса */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Легкий эффект фокуса */
+}
+
+/* Красивые кнопки */
+.btn {
+    background: linear-gradient(145deg, #6db3f2, #1e69e1); /* Градиент */
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px; /* Скругленные углы */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease, transform 0.3s ease;
+    margin: 10px;
+}
+
+.btn:hover {
+    background: linear-gradient(145deg, #1e69e1, #6db3f2); /* Эффект при наведении */
+    transform: translateY(-5px); /* Плавный подъем */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(2px); /* Эффект нажатия */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.5); /* Эффект фокуса */
+}
+
+/* Эффект параллакса на кнопках */
+@keyframes parallaxEffect {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+
+.btn:hover {
+    animation: parallaxEffect 0.5s ease-in-out infinite;
+}
+
+/* Общие стили для сообщений */
+.message {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.message.show {
+    display: block;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

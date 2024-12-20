@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Входящие</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Входящие</h1>
+        <ul class="email-list">
+            {% for email in emails %}
+            <li class="email-item">
+                <span><strong>От:</strong> {{ email.from }}</span>
+                <span><strong>Тема:</strong> {{ email.subject }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/home" class="btn">На главную</a>
+    </div>
+</body>
+</html>

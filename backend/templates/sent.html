@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отправленные письма</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Отправленные письма</h1>
+        <ul class="email-list">
+            {% for email in emails %}
+            <li class="email-item">
+                <span><strong>Кому:</strong> {{ email.to_email }}</span>
+                <span><strong>Тема:</strong> {{ email.subject }}</span>
+                <p><strong>Сообщение:</strong> {{ email.message_body }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/home" class="btn">На главную</a>
+    </div>
+</body>
+</html>

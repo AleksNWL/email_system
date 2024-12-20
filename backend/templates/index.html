@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать, {{ email }}!</h1>
+        <nav class="menu">
+            <a href="/send" class="menu-item">Отправить письмо</a>
+            <a href="/sent" class="menu-item">Отправленные письма</a>
+            <a href="/inbox" class="menu-item">Полученные письма</a>
+            <a href="/logout" class="menu-item">Выход</a>
+        </nav>
+    </div>
+</body>
+</html>
