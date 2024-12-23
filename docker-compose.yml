@@ -1,5 +1,6 @@
 services:
   backend:
+    image: your-dockerhub-account/backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -16,28 +17,41 @@ services:
       - "5000:5000"
 
   db-primary:
+    image: your-dockerhub-account/db-primary:latest
     build:
       context: ./db/primary
     volumes:
       - ./db/primary/data:/var/lib/postgresql/data
+      - ./db/primary/postgresql.conf:/etc/postgresql-custom/postgresql.conf
+      - ./db/primary/pg_hba.conf:/etc/postgresql-custom/pg_hba.conf
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: emails
+    command:
+      - "postgres"
+      - "-c"
+      - "config_file=/etc/postgresql-custom/postgresql.conf"
 
   db-replica:
+    image: your-dockerhub-account/db-replica:latest
     build:
       context: ./db/replica
     volumes:
       - ./db/replica/data:/var/lib/postgresql/data
+      - ./db/replica/postgresql.conf:/etc/postgresql-custom/postgresql.conf
+      - ./db/replica/pg_hba.conf:/etc/postgresql-custom/pg_hba.conf
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: emails
-    depends_on:
-      - db-primary
+    command:
+      - "postgres"
+      - "-c"
+      - "config_file=/etc/postgresql-custom/postgresql.conf"
 
   frontend:
+    image: your-dockerhub-account/frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -49,6 +63,7 @@ services:
       - backend
 
   load_balancer:
+    image: your-dockerhub-account/load-balancer:latest
     build:
       context: ./load_balancer
       dockerfile: Dockerfile
