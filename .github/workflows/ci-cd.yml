@@ -70,7 +70,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP << EOF
         set -e
-        cd /path/to/project
-        docker compose pull
-        docker compose up -d --remove-orphans
+        cd /path/to/project || exit 1
+        docker compose pull || exit 1
+        docker compose up -d --remove-orphans || exit 1
         EOF
